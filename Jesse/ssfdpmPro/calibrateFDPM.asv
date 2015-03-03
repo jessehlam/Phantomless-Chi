@@ -15,8 +15,8 @@ calibrated.phase=raw.phase-cal.phase;
 % phifit = polyfit(freq(1:20),calibrated.phase(1:20),2);
 % phipoly = polyval(phifit,freq);  
 % calibrated.phase = calibrated.phase-calibrated.phase(fdpm.up)+1; %Add 1 so that when calculating chi^2, we dont divide by 0
-%calibrated.phase = calibrated.phase-calibrated.phase(1);
-calibrated.phase = calibrated.phase-calibrated.phase(fdpm.up)+1;
+calibrated.phase = calibrated.phase-calibrated.phase(1);
+calibrated.phase = calibrated.phase-calibrated.phase(fdpm.up);
 calibrated.damp = calibrated.AC.*sqrt((raw.ACsd./raw.AC).^2 + cal.ACsd_AC_sqd);
 calibrated.dphi = sqrt(cal.phsd_sqd + raw.phsd.^2);
 

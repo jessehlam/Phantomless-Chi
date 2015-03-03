@@ -35,7 +35,7 @@ else
 %     DATA=[amp./mean(amp(1:5));phi];
       ampfit = polyfit(freq(1:20),amp(1:20),2);
       ampoly = polyval(ampfit,freq);  
-      DATA=[10.*(amp./ampoly(1));phi];
+      DATA=[amp./ampoly(1);phi];
 end
 
 flen = length(freq);
@@ -57,7 +57,6 @@ end
 
 %YDATA = DATA.*WT;
 YDATA = DATA;
-
 
 fdpmfit = mufit(diodes, model_to_fit, YDATA, WT, freq, n, dist, options, verbose, reff_option);
 

@@ -35,7 +35,7 @@ for a=1:nDiodes,
 	
 	%AMP
 	subplot( nDiodes, 2, 1 + 2*(a-1));
-	plot(final.freq,10.*(final.AC(:,a)./final.AC(1,a)),'b*'); % [haxes, hline1, hline2] = plotyy   ..  fit.freq, (fit.rawamp(:,a) - fit.amp(:,a)), 'plot',
+	plot(final.freq,(final.AC(:,a)./final.AC(1,a)),'b*'); % [haxes, hline1, hline2] = plotyy   ..  fit.freq, (fit.rawamp(:,a) - fit.amp(:,a)), 'plot',
 	haxes = gca;
 	axes_pos = get(haxes, 'Position');
 	set(haxes, 'Position', [axes_pos(1)+0.05 axes_pos(2)-.01 axes_pos(3) axes_pos(4)]); %with plot why, for each axes_pos , replace with axes_pos{1}

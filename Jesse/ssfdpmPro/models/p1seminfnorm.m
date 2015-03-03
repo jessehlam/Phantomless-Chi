@@ -170,7 +170,7 @@ end;
 %final outputs
 % y=[fa; fb];		%final return
 % fa = fa * 100;
-y=[(fa./fa(1))*10; fb-fb(1)+1];
+y=[(fa./fa(1)); fb-fb(1)+1];
 
 %  if(wt~=0)
 %      y = y.*wt;  %Weight for the curvefitting

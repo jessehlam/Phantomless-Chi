@@ -5,6 +5,8 @@ clear p
 global guiVal;
 
 warning('off')
+yourDIR='C:\Users\Jesse\Documents\Phantomless-Chi\Jesse';
+plotraw=0;
 
 %% FDPM Calibration Settings
 fdpm.cal.which = 1;   
@@ -86,9 +88,11 @@ fdpm.stderr=[0.03, 0.3];
 % used when reading in fdpm files averageFDPMDataAtDiodes.m
 
 freqcalc
+fdpm.up=numup; %Recording upper element
+fdpm.down=numdown; %Recording lower element
 %Calculate the usable frequency range
 
-fdpm.freqrange = [50; 800]; 
+fdpm.freqrange = [up; down]; 
 % frequency range to use in fdpm fitting
 % all measured frequencies can be used but smaller frequency sets are
 % sometimes required when data is noisy
@@ -309,7 +313,8 @@ p.gridimager=0;
 %%Run Processing
 error = ssfdpmPRO(fdpm,spec,physio,bw,p);
 %save(p.outLabel,'fdpm','spec','physio','bw','p');
-cd('C:\Users\Jesse\Phantom');
-
-
+if plotraw==1
+    rawplot
+end
+cd(yourDIR);
 

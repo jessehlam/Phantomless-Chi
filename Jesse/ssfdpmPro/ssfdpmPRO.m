@@ -21,7 +21,7 @@ for j=1:nFiles
     if ((j==1)||(fdpm.cal.which==3))
        fdpmcal = getFDPMCal(fdpm.cal, fdpm.diodes, fdpm.stderr, fdpm.boundary_option,char(fdpm.files(:,j)));
        if fdpmcal.error~=0, error=1; return; end
-    end 
+    end
     fdpm.opt.itr=j;
     final(j) = initFDPM(fdpm, fdpmcal,char(fdpm.files(:,j))); % opens fdpm files, does calibration, windows to frequency range and filters phase jumps
     fdpmfit(j) = fitFDPM(fdpm.diodes, final(j).freq, final(j).AC, final(j).damp, final(j).phase, final(j).dphi, fdpm.model_to_fit, fdpm.opt, pro.verbose, fdpm.n, final(j).dist, fdpm.boundary_option);
