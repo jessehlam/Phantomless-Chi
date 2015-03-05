@@ -1,4 +1,4 @@
-function cal=getFDPMCal(fdpmcal, diodes_selected, stderr, reff_option, file)
+function cal=getFDPMCal(fdpmcal, diodes_selected, stderr, reff_option, file,fdpm)
 %%%byh Calculates instrument response using measurement on phantom of known optical properties 
 
 % which_cal: 0 uncalibrated; 1 off phantom; 2 is 2 distance
@@ -38,6 +38,11 @@ end
 if which_cal==1     %% OFF PHANTOM
     %%%byh phantom files are read in and averaged together
     refdat=averageFDPMDataAtDiodes(char(phantoms),diodes_selected,stderr);
+    refdat.freq=refdat.freq(fdpm.up:fdpm.down);
+    refdat.AC=refdat.AC(fdpm.up:fdpm.down);
+    refdat.phase=refdat.phase(fdpm.up:fdpm.down);
+    refdat.ACsd=refdat.ACsd(fdpm.up:fdpm.down);
+    refdat.phsd=refdat.phsd(fdpm.up:fdpm.down);
     if refdat.error~=0
         cal.error=-1;
         return;
@@ -114,6 +119,7 @@ if which_cal==1     %% OFF PHANTOM
         n_filter = 1.5;
         
         cal.phase_offset = 360*refdat.freq*10^6*((L_cal-L_filter)/c/n_air+L_filter/c/n_filter);
+%         cal.phase_offset = 0;
         cal.phase(:,a) =refdat.phase(:,a) - deg2rad(cal.phase_offset);% - PHI_phan; %Correct phase through air and glass   		
         cal.phase(:,a) = cal.phase(:,a);%-cal.phase(1,a);
         cal.AC(:,a)   =refdat.AC(:,a);%./ AC_phan;

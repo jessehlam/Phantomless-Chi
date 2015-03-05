@@ -1,4 +1,4 @@
-function fit = mufit(diodes, model_to_fit, YDATA, WT, freq, nofr, r1, options, verbose, reff_option)
+function fit = mufit(diodes, model_to_fit, YDATA, WT, freq, nofr, r1, options, verbose, reff_option, normal)
 %%%byh Here the calibrated fdpm data is used along with the p1 model to
 %%%recover optical properties at each of the fdpm wavelengths. Following
 %%%that fit, the scattering is fit to a power law.
@@ -112,6 +112,7 @@ for a = 1:ndiodes
 	end;
 	
 	%Calculate fitted amp and phi
+    noWt=normal; %Modify weight to be the normalization factor
  	OUTP = feval('p1seminfnorm', P1(best,:), freq, 0, nofr,r1,r2, noWt, options.imagfit, reff_option);
 %    OUTP = feval(model_to_fit, P1(t,:), freq, 0, nofr,r1,r2, noWt, options.imagfit, reff_option);
 % OUTP = feval(model_to_fit, P1(best,:), freq, 0, n,r1, noWt, options.imagfit);

@@ -1,4 +1,4 @@
-function final = setFreqRangeJumpsDistance(calibrateddata, freqrange, jumps, nDiodes, rfixed)
+function final = setFreqRangeJumpsDistance(calibrateddata, freqrange, jumps, nDiodes, rfixed,fdpm)
 %windows calibrated data to given frequency range
 % also filters phase jumps out
 %   Output:
@@ -9,6 +9,7 @@ function final = setFreqRangeJumpsDistance(calibrateddata, freqrange, jumps, nDi
 %   final.freq
 %   final.dist
 
+calibrateddata.freq=calibrateddata.freq(fdpm.up:fdpm.down);
 if rfixed==0
     final.dist=calibrateddata.dist;
 else

@@ -1,3 +1,4 @@
+%"wt" has been modified to be the normalization factor
 %========================================================================================
 %SEMI-INFINITE PHASE AND AMPLITUDE CALCULATOR FOR P1 MODEL, v 2.5
 %========================================================================================
@@ -54,7 +55,7 @@
 %				MATLAB take the real and imaginary parts.				
 
 
-function y = p1seminf(p,f,fx,nind,rho1,rho2, wt, reim_flag,boundary_opt, reff)
+function y = p1seminfnorm(p,f,fx,nind,rho1,rho2, wt, reim_flag,boundary_opt, reff)
 
 %*************************************************************************
 %PRELIMINARY MATTERS
@@ -72,9 +73,9 @@ if nargin<8  %equivalent to phase/amp fit
    reim_flag = 0;
 end;
 
-if nargin<7  %equivalent to no weights
-   wt = ones(length(f)*2,1);
-end;
+% if nargin<7  %equivalent to no weights
+%    wt = ones(length(f)*2,1);
+% end;
 
 if nargin<6  %equivalent to one distance
    rho2=0;
@@ -170,7 +171,9 @@ end;
 %final outputs
 % y=[fa; fb];		%final return
 % fa = fa * 100;
-y=[(fa./fa(1)); fb-fb(1)+1];
+fa=fa./fa(1);
+% y=[fa.*wt; fb-fb(1)+1];
+y=[fa; fb-fb(1)+1];
 
 %  if(wt~=0)
 %      y = y.*wt;  %Weight for the curvefitting

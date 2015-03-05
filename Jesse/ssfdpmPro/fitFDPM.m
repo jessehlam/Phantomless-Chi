@@ -33,9 +33,15 @@ else
     %DATA = [amp; phi];
 %     DATA=[amp./amp(1);phi];
 %     DATA=[amp./mean(amp(1:5));phi];
-      ampfit = polyfit(freq(1:20),amp(1:20),2);
-      ampoly = polyval(ampfit,freq);  
-      DATA=[amp./ampoly(1);phi];
+      ampfit = polyfit(freq(1:40),amp(1:40),1);
+      ampoly = polyval(ampfit,freq);
+%       figure;plot(freq,amp)
+%         hold on
+%         plot(freq,ampoly,'r')
+%         hold off
+      amp=amp./ampoly(1);
+      DATA=[amp;phi];
+      normal=DATA(1,1); %amplitude of the first point, to normalize model amp
 end
 
 flen = length(freq);
@@ -58,6 +64,6 @@ end
 %YDATA = DATA.*WT;
 YDATA = DATA;
 
-fdpmfit = mufit(diodes, model_to_fit, YDATA, WT, freq, n, dist, options, verbose, reff_option);
+fdpmfit = mufit(diodes, model_to_fit, YDATA, WT, freq, n, dist, options, verbose, reff_option,normal);
 
 

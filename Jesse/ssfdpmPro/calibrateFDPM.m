@@ -8,7 +8,8 @@ function calibrated=calibrateFDPM(cal,raw,range,fdpm)
 % calibrated.freq
 % calibrated.dist
 
-
+raw.AC=raw.AC(fdpm.up:fdpm.down);
+raw.phase=raw.phase(fdpm.up:fdpm.down);
 calibrated.AC=raw.AC./cal.AC;
 calibrated.phase=raw.phase-cal.phase;
 % freq=raw.freq(fdpm.up:fdpm.down);
@@ -16,9 +17,9 @@ calibrated.phase=raw.phase-cal.phase;
 % phipoly = polyval(phifit,freq);  
 % calibrated.phase = calibrated.phase-calibrated.phase(fdpm.up)+1; %Add 1 so that when calculating chi^2, we dont divide by 0
 %calibrated.phase = calibrated.phase-calibrated.phase(1);
-calibrated.phase = calibrated.phase-calibrated.phase(fdpm.up)+1;
-calibrated.damp = calibrated.AC.*sqrt((raw.ACsd./raw.AC).^2 + cal.ACsd_AC_sqd);
-calibrated.dphi = sqrt(cal.phsd_sqd + raw.phsd.^2);
+calibrated.phase = calibrated.phase-calibrated.phase(1)+1;
+calibrated.damp = calibrated.AC.*sqrt((raw.ACsd(fdpm.up:fdpm.down)./raw.AC).^2 + cal.ACsd_AC_sqd);
+calibrated.dphi = sqrt(cal.phsd_sqd + raw.phsd(fdpm.up:fdpm.down).^2);
 
 calibrated.freq = raw.freq;
 

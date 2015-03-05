@@ -1,3 +1,7 @@
+%Adjusts frequency range by two conditions:
+%1. The amplitude is above the noise floor
+%2. The amplitude is within the APD's linearity range
+
 dataloc=strcat(guiVal.dataDir,guiVal.patientID,'\',guiVal.date,'\'); %Getting location of dark file
 darkimport=importdata(strcat(dataloc,'DARK-dcswitch.asc')); %Reconstructing location of dark file
 msmtimport=importdata(strcat(dataloc,guiVal.prefixList{1},'-dcswitch.asc')); %Reconstructing location of msmt file
@@ -20,8 +24,8 @@ if isempty(phancut)
     phancut=max(freq);
 end
 
-msmtupper=find(msmtdat>-10); %Finding when the amplitude is out of the non-linear region of APD
-phanupper=find(phandat>-10);
+msmtupper=find(msmtdat>-15); %Finding when the amplitude is out of the non-linear region of APD
+phanupper=find(phandat>-15);
 
 if isempty(msmtupper) %If the amplitude is within the linear region, set to the min freq
     msmtupper=min(freq);

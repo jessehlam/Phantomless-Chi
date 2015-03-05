@@ -26,6 +26,6 @@ calibrated = calibrateFDPM(cal, raw, range, fdpm);
 %%%byh A subset of frequencies can be used in the processing, here we
 %%%reduce the measurement data to frequencies in the subset range.  We also
 %%%have a check and fix for possible phase jumps.  
-final = setFreqRangeJumpsDistance(calibrated, fdpm.freqrange, fdpm.opt.jumps, fdpm.ndiodes, fdpm.opt.rfixed);
+final = setFreqRangeJumpsDistance(calibrated, fdpm.freqrange, fdpm.opt.jumps, fdpm.ndiodes, fdpm.opt.rfixed,fdpm);
 final.phantom_used=fdpm.cal.phantoms_short(cal.phantom_used);
 final.timestamp = raw.timestamp;
